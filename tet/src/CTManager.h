@@ -8,11 +8,17 @@
 #ifndef CTMANAGER_H_
 #define CTMANAGER_H_
 
+#include "InputHandler.h"
+
 class CTManager {
 public:
 	CTManager();
 	~CTManager();
+
+	void start();
 protected:
+	InputHandler mInputHandler;
+
 
 private:
 

@@ -1,26 +1,27 @@
 /*
- * InputHandler.cpp
+ * AKSTestClass.cpp
  *
- *  Created on: 2013. 4. 16.
+ *  Created on: 2013. 4. 22.
  *      Author: ÇÃ·§Æû¿î¿µÆÀ
  */
 
-#include "InputHandler.h"
-#include <windows.h>
+#include "AKSTestClass.h"
 #include <iostream>
+#include <windows.h>
 
 using namespace std;
 
-InputHandler::InputHandler() {
+
+AKSTestClass::AKSTestClass() {
 	// TODO Auto-generated constructor stub
 
 }
 
-InputHandler::~InputHandler() {
+AKSTestClass::~AKSTestClass() {
 	// TODO Auto-generated destructor stub
 }
 
-UINT WINAPI InputHandler::receiveInput(LPVOID p){
+void AKSTestClass::test(){
 	int keycode=0;
 
 
@@ -41,14 +42,6 @@ UINT WINAPI InputHandler::receiveInput(LPVOID p){
 	keycode=2;
 	}
 
-	if(GetAsyncKeyState(VK_LEFT))
-	{
-	if(keycode==1)
-	keycode=3;
-	else
-	keycode=2;
-	}
-
 
 	if(GetAsyncKeyState(VK_ESCAPE))
 	keycode=-1;
@@ -57,7 +50,5 @@ UINT WINAPI InputHandler::receiveInput(LPVOID p){
 	cout<< keycode<< endl;
 	system("cls");
 	}
-
-	return 0;
 
 }
