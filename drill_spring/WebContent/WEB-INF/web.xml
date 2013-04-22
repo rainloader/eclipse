@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+ 
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"  
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"  
+    version="2.5">  
+
+<!-- 위에 작성한 springapp 을 DIspatcherServlet 으로 정의하는 것이다 -->
+
+
+<servlet>
+      <servlet-name>drill_spring</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <load-on-startup>1</load-on-startup> <!-- 시작하면 로드됨 -->
+  </servlet>
+  
+
+
+
+
+
+<!-- .do 로 끝나면 URL 패턴이 있으면 그걸 springapp, 즉 DispatcherServlet 으로 가게 한다 -->
+
+<!-- 그리고 이 springapp, 즉 DispatcherServlet 에서 핸들러매핑에 의해 적절한 컨트롤러로 보내지게 된다. -->
+
+
+  <servlet-mapping>
+      <servlet-name>drill_spring</servlet-name>
+      <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+
+
+</web-app>

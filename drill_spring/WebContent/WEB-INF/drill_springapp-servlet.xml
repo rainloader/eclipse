@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- 스키마 선언 -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+
+
+
+<!-- 핸들러 매핑 빈 -->
+<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+<!-- 빈의 네임과 url을 맵핑을 시켜준다 하여 BeanNameUrlHandler 이다 -->
+
+
+<!--  컨트롤러 빈 객체 정의 -->
+<bean name="/hello.do" class="control.HelloController"/>
+
+<!-- 뷰 리졸버 빈 -->
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+<!-- hello라는 뷰 정보 앞에다 경로명을 prefix로 붙여줌 -->
+
+<!-- 이게 바로 어느 뷰 페이지로 이 정보결과가 가서 표시되야하는지 설정하는 ViewResolver 기능임 -->
+<property name="prefix">
+<value>/WEB-INF/view/</value>
+</property>
+
+<!-- 뷰 정보에 확장자를 suffix로 붙여줌 -->
+<property name="suffix">
+<value>.jsp</value>
+</property>
+
+</bean>
+</beans>
