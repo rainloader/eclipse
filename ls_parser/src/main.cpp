@@ -14,9 +14,9 @@ int main()
 {
 	LsParser lsParser;
 
-	lsParser.openFiles("vobos_all_20130410.txt", "output2.txt");
+	lsParser.openFiles("vobos_all_20130410_2.txt", "output.txt");
 
-	lsParser.analyze();
+	lsParser.parse();
 
 	lsParser.closeFiles();
 
