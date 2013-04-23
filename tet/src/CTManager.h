@@ -9,6 +9,8 @@
 #define CTMANAGER_H_
 
 #include "InputHandler.h"
+#include "PrintoutProcessor.h"
+#include "Data.h"
 
 class CTManager {
 public:
@@ -27,7 +29,8 @@ protected:
 
 
 	InputHandler mInputHandler;
-	HANDLE mInputHandlerThread;
+	PrintoutProcessor mPrintoutProcessor;
+	//HANDLE mInputHandlerThread;
 	Data data;
 private:
 };

@@ -25,7 +25,7 @@ void CTManager::start(){
 	/* put inputha */
 	//mInputHandlerThread = (HANDLE) _beginthreadex(NULL, 0, mInputHandler.receiveInputT, NULL, 0, NULL);
 	title();
-	WaitForSingleObject(mInputHandlerThread, INFINITE);
+	//WaitForSingleObject(mInputHandlerThread, INFINITE);
 
 }
 
@@ -47,12 +47,15 @@ void CTManager::menu(){
 	cout << "MENU" << endl;
 	char ch = mInputHandler.receiveInput();
 	cout << ch << endl;
+	play();
 }
 
 void CTManager::play(){
+	system("cls");
 	data.initialize();
 	while(1){
-
+		mPrintoutProcessor.printPlayMap(&(this->data));
+		mInputHandler.receiveInput();
 	}
 }
 
@@ -60,6 +63,10 @@ void CTManager::end(){
 	closeThread();
 }
 
+void CTManager::drawMap(){
+
+}
+
 void CTManager::closeThread(){
-	CloseHandle(mInputHandlerThread);
+	//CloseHandle(mInputHandlerThread);
 }

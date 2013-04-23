@@ -26,3 +26,7 @@ void Data::initialize() {
 		}
 	}
 }
+
+short Data::getMapPoint(int i, int j){
+	return map[i][j];
+}

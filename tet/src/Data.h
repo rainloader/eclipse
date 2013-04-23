@@ -17,8 +17,21 @@ public:
 	~Data();
 
 	void initialize();
+	short getMapPoint(int i, int j);
 protected:
-	char map[MAP_HEIGHT][MAP_WIDTH];
+
+	/* map code
+	 * 0 - empty
+	 * 1 - I block
+	 * 2 - J block
+	 * 3 - L block
+	 * 4 - O block
+	 * 5 - S block
+	 * 6 - T block
+	 * 7 - Z block
+	 * */
+	short map[MAP_HEIGHT][MAP_WIDTH];
+
 	int score;
 	int line;
 	int level;
