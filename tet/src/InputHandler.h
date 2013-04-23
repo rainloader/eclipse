@@ -14,7 +14,12 @@ class InputHandler {
 public:
 	InputHandler();
 	~InputHandler();
-	static UINT WINAPI receiveInput(LPVOID p);
+	static UINT WINAPI receiveInputT(LPVOID p);
+	char receiveInput();
+	void setKeyStat(char key);
+	char getKeyStat();
+protected:
+	char keyStat;
 };
 
 #endif /* INPUTHANDLER_H_ */

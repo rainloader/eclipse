@@ -16,12 +16,20 @@ public:
 	~CTManager();
 
 	void start();
+	void end();
 protected:
+	void closeThread();
+	void title();
+	void menu();
+	void play();
+
+	void drawMap();
+
+
 	InputHandler mInputHandler;
-
-
+	HANDLE mInputHandlerThread;
+	Data data;
 private:
-
 };
 
 #endif /* CTMANAGER_H_ */
