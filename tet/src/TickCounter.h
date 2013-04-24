@@ -8,21 +8,19 @@
 #ifndef TICKCOUNTER_H_
 #define TICKCOUNTER_H_
 
-//#include "delegate.h"
+#include "Notifiable.h"
 
 class TickCounter {
 public:
-	//typedef Delegate0<void> Callback;
-
-	TickCounter();
-	//TickCounter(Callback callback);
+	TickCounter(Notifiable* callee_);
 	~TickCounter();
 	void setPeriod(int period);
 	void run();
 	void alarm();
+
 protected:
 	int mPeriod;
-//Callback callback_;
+	Notifiable* callee_;
 };
 
 #endif /* TICKCOUNTER_H_ */

@@ -14,11 +14,11 @@ using namespace std;
 
 
 CTManager::CTManager() {
-	// TODO Auto-generated constructor stub
+	mTickCounter = new TickCounter(this);
 }
 
 CTManager::~CTManager() {
-	// TODO Auto-generated destructor stub
+	delete mTickCounter;
 }
 
 void CTManager::start(){
@@ -61,6 +61,9 @@ void CTManager::play(){
 		mPrintoutProcessor.printPlayMap(&(this->mData));
 		mInputHandler.receiveInput();
 	}
+}
+
+void CTManager::notify(int callerType){
 
 }
 

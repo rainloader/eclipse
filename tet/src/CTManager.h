@@ -11,8 +11,10 @@
 #include "InputHandler.h"
 #include "PrintoutProcessor.h"
 #include "Data.h"
+#include "TickCounter.h"
+#include "Notifiable.h"
 
-class CTManager {
+class CTManager : protected Notifiable {
 public:
 	CTManager();
 	~CTManager();
@@ -24,12 +26,14 @@ protected:
 	void title();
 	void menu();
 	void play();
+	void notify(int callerType);
 
 	void drawMap();
 
 
 	InputHandler mInputHandler;
 	PrintoutProcessor mPrintoutProcessor;
+	TickCounter* mTickCounter;
 	//HANDLE mInputHandlerThread;
 	Data mData;
 private:
