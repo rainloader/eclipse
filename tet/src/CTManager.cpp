@@ -52,11 +52,16 @@ void CTManager::menu(){
 
 void CTManager::play(){
 	system("cls");
-	data.initialize();
+	mData.initialize();
+	//timer set.
 	while(1){
-		mPrintoutProcessor.printPlayMap(&(this->data));
+		//start timer count.
+
+
+		mPrintoutProcessor.printPlayMap(&(this->mData));
 		mInputHandler.receiveInput();
 	}
+
 }
 
 void CTManager::end(){

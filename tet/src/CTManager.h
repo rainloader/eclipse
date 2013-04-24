@@ -31,7 +31,7 @@ protected:
 	InputHandler mInputHandler;
 	PrintoutProcessor mPrintoutProcessor;
 	//HANDLE mInputHandlerThread;
-	Data data;
+	Data mData;
 private:
 };
 

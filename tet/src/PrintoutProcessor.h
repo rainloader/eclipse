@@ -15,7 +15,7 @@ class PrintoutProcessor {
 public:
 	PrintoutProcessor();
 	~PrintoutProcessor();
-	void printPlayMap(const Data* pData);
+	void printPlayMap(Data* pData);
 protected:
 	void gotoxy(int x, int y);
 

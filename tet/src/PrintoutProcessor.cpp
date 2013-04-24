@@ -8,6 +8,8 @@
 #include "PrintoutProcessor.h"
 
 #include <iostream>
+#include <unistd.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -20,13 +22,20 @@ PrintoutProcessor::~PrintoutProcessor() {
 	// TODO Auto-generated destructor stub
 }
 
-void PrintoutProcessor::printPlayMap(const Data* pData){
-	cout << "printmap" << endl;
-	for(int i=0; i<MAP_HEIGHT; i++){
-		for(int j=0; j<MAP_WIDTH; j++){
-			//short mapPoint = pData->getMapPoint(i, j);
-			gotoxy(i, j);
-			cout << "бс";
+void PrintoutProcessor::printPlayMap(Data* pData){
+	//cout << "printmap" << endl;
+	for(int i=0; i<MAP_WIDTH; i++){
+		for(int j=0; j<MAP_HEIGHT; j++){
+			gotoxy(i*2, j);
+			short mapPoint = pData->getMapPoint(i, j);
+			//usleep(5000);
+			if(mapPoint == 0)
+				cout << "  ";
+			else
+				cout << "бс";
+			//wchar_t block = '3';//0x25A0;
+			//wcout << block;
+
 		}
 	}
 }
