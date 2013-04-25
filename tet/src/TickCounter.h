@@ -9,6 +9,7 @@
 #define TICKCOUNTER_H_
 
 #include <windows.h>
+
 #include "Notifiable.h"
 
 class TickCounter {
@@ -16,13 +17,22 @@ public:
 	TickCounter(Notifiable* callee_);
 	~TickCounter();
 	void setPeriod(DWORD period);
+	DWORD getPeriod();
+
+	void startThread();
+	void finishThread();
+
+	static UINT WINAPI runThread(LPVOID p);
 	void run();
-	void alarm();
 
 protected:
+
+	void alarm();
 	DWORD mPeriod;
 	DWORD mGameStartTime;
 	Notifiable* callee_;
+
+	HANDLE hThread;
 };
 
 

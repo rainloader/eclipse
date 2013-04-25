@@ -14,11 +14,20 @@ using namespace std;
 
 
 CTManager::CTManager() {
-	mTickCounter = new TickCounter(this);
+	mPInputHandler = new InputHandler();
+	mPPrintoutProcessor = new PrintoutProcessor();
+	mPTickCounter = new TickCounter(this);
+	mPData = new MapData();
+	mPIngameProcessor = new IngameProcessor(mPPrintoutProcessor, mPInputHandler, mPData);
 }
 
 CTManager::~CTManager() {
-	delete mTickCounter;
+
+	delete mPIngameProcessor;
+	delete mPData;
+	delete mPTickCounter;
+	delete mPInputHandler;
+	delete mPPrintoutProcessor;
 }
 
 void CTManager::start(){
@@ -33,7 +42,7 @@ void CTManager::title(){
 	cout << "TITLE" << endl;
 	cout << "Press Any Key" << endl;
 	while(1){
-		if(mInputHandler.receiveInput() != 0)
+		if(mPInputHandler->receiveInput() != 0)
 		{
 			menu();
 			break;
@@ -45,29 +54,34 @@ void CTManager::title(){
 void CTManager::menu(){
 	system("cls");
 	cout << "MENU" << endl;
-	char ch = mInputHandler.receiveInput();
+	char ch = mPInputHandler->receiveInput();
 	cout << ch << endl;
 	play();
 }
 
 void CTManager::play(){
-	system("cls");
-	mData.initialize();
-	//timer set.
-	while(1){
-		//start timer count.
-
-
-		mPrintoutProcessor.printPlayMap(&(this->mData));
-		mInputHandler.receiveInput();
-		mTickCounter->run();
-	}
+	mPIngameProcessor->play();
 }
 
 void CTManager::notify(int callerType){
 	if(callerType == NOTIFY_TICKCOUNTER){
-		cout << "!!";
+		//down block
+
+		//if(space below) -> down
+
+		//else(no space) -> next block
+
+		/**/cout << "!!";
 	}
+}
+
+
+void CTManager::moveBlock(int movingDirection){
+
+}
+
+void CTManager::rotateBlock(int rotatingDirection){
+
 }
 
 void CTManager::end(){

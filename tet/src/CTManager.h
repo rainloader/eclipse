@@ -10,7 +10,8 @@
 
 #include "InputHandler.h"
 #include "PrintoutProcessor.h"
-#include "Data.h"
+#include "IngameProcessor.h"
+#include "MapData.h"
 #include "TickCounter.h"
 #include "Notifiable.h"
 
@@ -26,16 +27,22 @@ protected:
 	void title();
 	void menu();
 	void play();
+
 	void notify(int callerType);
 
 	void drawMap();
 
+	void moveBlock(int movingDirection);
+	void rotateBlock(int rotatingDirection);
 
-	InputHandler mInputHandler;
-	PrintoutProcessor mPrintoutProcessor;
-	TickCounter* mTickCounter;
+	PrintoutProcessor* mPPrintoutProcessor;
+	InputHandler* mPInputHandler;
+
+	IngameProcessor* mPIngameProcessor;
+
+	TickCounter* mPTickCounter;
 	//HANDLE mInputHandlerThread;
-	Data mData;
+	MapData* mPData;
 private:
 };
 

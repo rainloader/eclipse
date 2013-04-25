@@ -11,10 +11,11 @@
 #define MAP_HEIGHT 20
 #define MAP_WIDTH 10
 
-class Data {
+class MapData {
 public:
-	Data();
-	~Data();
+	MapData();
+	MapData(const MapData& mapData);
+	~MapData();
 
 	void initialize();
 	short getMapPoint(int i, int j);
@@ -31,10 +32,6 @@ protected:
 	 * 7 - Z block
 	 * */
 	short map[MAP_HEIGHT][MAP_WIDTH];
-
-	int score;
-	int line;
-	int level;
 };
 
 #endif /* GAMEINFO_H_ */

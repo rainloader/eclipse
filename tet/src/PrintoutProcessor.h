@@ -8,14 +8,14 @@
 #ifndef PRINTOUTPROCESSOR_H_
 #define PRINTOUTPROCESSOR_H_
 
+#include "MapData.h"
 #include <windows.h>
-#include "Data.h"
 
 class PrintoutProcessor {
 public:
 	PrintoutProcessor();
 	~PrintoutProcessor();
-	void printPlayMap(Data* pData);
+	void printPlayMap(MapData* pData);
 protected:
 	void gotoxy(int x, int y);
 

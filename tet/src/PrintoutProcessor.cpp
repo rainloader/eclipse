@@ -22,18 +22,16 @@ PrintoutProcessor::~PrintoutProcessor() {
 	// TODO Auto-generated destructor stub
 }
 
-void PrintoutProcessor::printPlayMap(Data* pData){
+void PrintoutProcessor::printPlayMap(MapData* pData){
 	//cout << "printmap" << endl;
 	for(int i=0; i<MAP_WIDTH; i++){
 		for(int j=0; j<MAP_HEIGHT; j++){
 			gotoxy(i*2, j);
 			short mapPoint = pData->getMapPoint(i, j);
-		/*	if(mapPoint == 0)
+			if(mapPoint == 0)
 				cout << "  ";
 			else
-				cout << "бс";*/
-
-			cout << "бс";
+				cout << "бс";
 
 		}
 	}

@@ -6,7 +6,7 @@
  */
 
 #include "TickCounter.h"
-//#include <Mmsystem.h>
+#include <process.h>
 
 TickCounter::TickCounter(Notifiable* callee) : callee_(callee) {
 	setPeriod(1000);
@@ -17,6 +17,27 @@ TickCounter::~TickCounter() {
 
 void TickCounter::setPeriod(DWORD period){
 	this->mPeriod = period;
+}
+
+DWORD TickCounter::getPeriod(){
+	return this->mPeriod;
+}
+
+void TickCounter::startThread(){
+	hThread = (HANDLE) _beginthreadex(NULL, 0, runThread, (LPVOID)this, 0, NULL);
+	WaitForSingleObject(hThread, INFINITE);
+}
+
+void TickCounter::finishThread(){
+
+	CloseHandle(hThread);
+}
+
+UINT WINAPI TickCounter::runThread(LPVOID p){
+	TickCounter* pTickCounter  = (TickCounter*) p;
+
+	pTickCounter->run();
+	return 0;
 }
 
 void TickCounter::run(){
@@ -33,6 +54,8 @@ void TickCounter::run(){
 		}
 	}
 }
+
+
 
 void TickCounter::alarm(){
 	callee_->notify(NOTIFY_TICKCOUNTER);
