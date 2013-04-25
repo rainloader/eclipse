@@ -28,13 +28,12 @@ void PrintoutProcessor::printPlayMap(Data* pData){
 		for(int j=0; j<MAP_HEIGHT; j++){
 			gotoxy(i*2, j);
 			short mapPoint = pData->getMapPoint(i, j);
-			//usleep(5000);
-			if(mapPoint == 0)
+		/*	if(mapPoint == 0)
 				cout << "  ";
 			else
-				cout << "бс";
-			//wchar_t block = '3';//0x25A0;
-			//wcout << block;
+				cout << "бс";*/
+
+			cout << "бс";
 
 		}
 	}

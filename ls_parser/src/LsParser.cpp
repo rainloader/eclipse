@@ -352,7 +352,6 @@ void LsParser::analyze() {
 		}
 	}
 
-	string secondLayerString = secondLayer;
 	fout << secondLayer << logDel << jspCounter << endl;
 /*
 
@@ -366,6 +365,89 @@ void LsParser::analyze() {
 
 	cout << "parse over!" << endl;
 
+}
+
+void LsParser::parseCSVExtensionList(){
+	char line[MAX_LINE_LENGTH+1] = {0};
+	char directory[MAX_LINE_LENGTH+1] = {0};
+	char copiedDirectory[MAX_LINE_LENGTH+1] = {0};
+	char* newSecondLayer = 0;
+	char secondLayer[MAX_LINE_LENGTH+1] = {0};
+	char fileExtension[MAX_FILE_NAME_LENGTH+1] = {0};
+	int jspCounter = 0;
+	int fileCounter = 0;
+
+	char* token = 0; // token
+
+	for(int i=0; !fin.eof(); i++) {
+
+		fin.getline(line, MAX_LINE_LENGTH);
+
+		/* ===Analyze line.=== */
+
+		/* if the line is empty, pass the line */
+		if(strlen(line) <= 0)
+		{
+			continue;
+		}
+		/* if the line starts with "./", it must be directory. */
+
+		/* ===Parse line.=== */
+
+		/* Read directory */
+		token = strtok(line, ",");
+		strncpy(directory, token, strlen(token));
+		directory[strlen(token)] = 0;
+
+
+
+
+		/* Read extension */
+		token = strtok(NULL, "");
+		token = trim(token);	/* trim blanks from back and forth */
+		strncpy(fileExtension, token, strlen(token));
+		fileExtension[strlen(token)] = 0;
+
+
+		/* identify directory of second layer */
+		strcpy(copiedDirectory, directory);
+
+		strtok(copiedDirectory, "/");
+		strtok(NULL, "/");
+		newSecondLayer = strtok(NULL, "/");
+		if(newSecondLayer == 0){
+			newSecondLayer = "___";
+		}
+		if(secondLayer[0] == 0)
+		{
+			strcpy(secondLayer, newSecondLayer);
+		}
+		/* if there`s new second layer appears */
+		else if(strcmp(secondLayer, newSecondLayer) != 0){
+			fout << secondLayer << logDel << fileCounter << logDel << jspCounter << endl;
+			strcpy(secondLayer, newSecondLayer);
+			jspCounter = 0;
+			fileCounter = 0;
+		}
+
+
+		fileCounter++;
+		if(strcmp(fileExtension, "jsp")==0 || strcmp(fileExtension, "jsp__")==0){
+			jspCounter++;
+		}
+
+
+
+		if(i%10000 == 0){
+			cout << i << " line completed." << endl;
+		}
+	}
+
+
+	/* ===Write to file=== */
+	fout << secondLayer << logDel << fileCounter << logDel << jspCounter << endl;
+
+	cout << "parse over!" << endl;
 }
 
 void LsParser::closeFiles() {

@@ -8,19 +8,22 @@
 #ifndef TICKCOUNTER_H_
 #define TICKCOUNTER_H_
 
+#include <windows.h>
 #include "Notifiable.h"
 
 class TickCounter {
 public:
 	TickCounter(Notifiable* callee_);
 	~TickCounter();
-	void setPeriod(int period);
+	void setPeriod(DWORD period);
 	void run();
 	void alarm();
 
 protected:
-	int mPeriod;
+	DWORD mPeriod;
+	DWORD mGameStartTime;
 	Notifiable* callee_;
 };
+
 
 #endif /* TICKCOUNTER_H_ */

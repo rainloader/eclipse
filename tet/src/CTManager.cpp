@@ -60,11 +60,14 @@ void CTManager::play(){
 
 		mPrintoutProcessor.printPlayMap(&(this->mData));
 		mInputHandler.receiveInput();
+		mTickCounter->run();
 	}
 }
 
 void CTManager::notify(int callerType){
-
+	if(callerType == NOTIFY_TICKCOUNTER){
+		cout << "!!";
+	}
 }
 
 void CTManager::end(){

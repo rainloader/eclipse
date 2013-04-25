@@ -6,24 +6,32 @@
  */
 
 #include "TickCounter.h"
-#include "time.h"
+//#include <Mmsystem.h>
 
 TickCounter::TickCounter(Notifiable* callee) : callee_(callee) {
-	// TODO Auto-generated constructor stub
-	mPeriod = 1000;
+	setPeriod(1000);
 }
 
 TickCounter::~TickCounter() {
-	// TODO Auto-generated destructor stub
-
 }
 
-void TickCounter::setPeriod(int period){
+void TickCounter::setPeriod(DWORD period){
 	this->mPeriod = period;
 }
 
 void TickCounter::run(){
+	DWORD mGameStartTime = timeGetTime();
 
+	while(1){
+		DWORD periodStartTime = timeGetTime();
+		while(1){
+			DWORD periodElapsedTime = timeGetTime() - periodStartTime;
+			if(periodElapsedTime >= mPeriod){
+				alarm();
+				break;
+			}
+		}
+	}
 }
 
 void TickCounter::alarm(){

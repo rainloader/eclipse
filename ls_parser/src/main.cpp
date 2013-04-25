@@ -14,9 +14,11 @@ int main()
 {
 	LsParser lsParser;
 
-	lsParser.openFiles("vobos_all_20130410_2.txt", "output.txt");
+	//lsParser.openFiles("vobos_all_20130410_2.txt", "output.txt");
+	//lsParser.parse();
 
-	lsParser.parse();
+	lsParser.openFiles("vobos_all_20130410_final.csv", "statistics.txt");
+	lsParser.parseCSVExtensionList();
 
 	lsParser.closeFiles();
 
