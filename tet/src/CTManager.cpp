@@ -22,7 +22,6 @@ CTManager::CTManager() {
 }
 
 CTManager::~CTManager() {
-
 	delete mPIngameProcessor;
 	delete mPData;
 	delete mPTickCounter;

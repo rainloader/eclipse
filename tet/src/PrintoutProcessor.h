@@ -9,13 +9,14 @@
 #define PRINTOUTPROCESSOR_H_
 
 #include "MapData.h"
+#include "Block.h"
 #include <windows.h>
 
 class PrintoutProcessor {
 public:
 	PrintoutProcessor();
 	~PrintoutProcessor();
-	void printPlayMap(MapData* pData);
+	void printPlayMap(MapData* pData, Block* pBlock);
 protected:
 	void gotoxy(int x, int y);
 

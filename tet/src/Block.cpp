@@ -25,7 +25,7 @@ Block::~Block() {
 
 }
 
-int Block::setType(short blockType){
+int Block::init(short blockType){
 	/*set block type*/
 	switch(blockType){
 	case TYPE_I_BLOCK:

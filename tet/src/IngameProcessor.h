@@ -26,9 +26,10 @@ protected:
 
 	void generateBlock();
 	int moveBlock(short movingDirection);
-	void rotateBlock(short rotatingDirection);
+	int rotateBlock(short rotatingDirection);
 
-	bool blockCollisionCheck(Block block);
+	bool checkBlockCollision(Block block);
+	void writeBlockToMap();
 
 
 	PrintoutProcessor* mPPrintoutProcessor;
@@ -36,7 +37,7 @@ protected:
 	TickCounter* mPTickCounter;
 
 	MapData* mPMapData;
-	Block* mBlock;
+	Block* mPBlock;
 
 	int mScore;
 	int mLine;

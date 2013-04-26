@@ -35,3 +35,7 @@ void MapData::initialize() {
 short MapData::getMapPoint(int X, int Y){
 	return map[X][Y];
 }
+
+void MapData::setMapPoint(int X, int Y, short pointValue){
+	map[X][Y] = pointValue;
+}

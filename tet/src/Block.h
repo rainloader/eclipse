@@ -34,7 +34,7 @@ public:
 	Block();
 	Block(const Block& block);
 	~Block();
-	int setType(short blockType);
+	int init(short blockType);
 	short getType();
 	MAPPOS getPos(int index);
 

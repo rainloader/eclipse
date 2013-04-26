@@ -20,6 +20,7 @@ public:
 
 	void initialize();
 	short getMapPoint(int X, int Y);
+	void setMapPoint(int X, int Y, short pointValue);
 protected:
 
 	/* map code

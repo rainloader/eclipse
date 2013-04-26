@@ -85,7 +85,7 @@ void LsParser::parse(){
 			continue;
 		}
 		/* identify filetype. if there is wrong first character which not starts with file type, it must be an error.
-		 * 'D' is for Door in the Sun Solaris operating system*/
+		 * 'D' is for Door in the Sun Solaris operating system */
 		else if(line[0] != '-' && line[0] != 'd' && line[0] != 'c' &&
 				line[0] != 'b' && line[0] != 'p' && line[0] != 'l' &&
 				line[0] != 's' && line[0] != 'D'){
