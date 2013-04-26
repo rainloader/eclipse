@@ -28,6 +28,8 @@ protected:
 	int moveBlock(short movingDirection);
 	void rotateBlock(short rotatingDirection);
 
+	bool blockCollisionCheck(Block block);
+
 
 	PrintoutProcessor* mPPrintoutProcessor;
 	InputHandler* mPInputHandler;

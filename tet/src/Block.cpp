@@ -14,14 +14,18 @@ Block::Block() {
 		mBlockPosArray[i].Y = 0;
 	}
 	mType = 1;
-	mRotatingStatus = 1;
+}
+Block::Block(const Block& block) {
+	for(int i=0; i<4; i++)
+		mBlockPosArray[i] = block.mBlockPosArray[i];
+	mType = block.mType;
 }
 
 Block::~Block() {
-	// TODO Auto-generated destructor stub
+
 }
 
-int Block::setBlockType(short blockType){
+int Block::setType(short blockType){
 	/*set block type*/
 	switch(blockType){
 	case TYPE_I_BLOCK:
@@ -106,11 +110,84 @@ int Block::setBlockType(short blockType){
 		return 1;
 		break;
 	}
-	/* initialize rotating status */
-	mRotatingStatus = ROTATING_STATUS_12;
 	return 0;
 }
 
-void Block::rotate(short rotatingDirection){
+short Block::getType(){
+	return mType;
+}
 
+MAPPOS Block::getPos(int index){
+	return mBlockPosArray[index];
+}
+
+int Block::move(short movingDirection){
+	MAPPOS displacement;
+	switch(movingDirection){
+	case MOVING_DIRECTION_LEFT:
+		displacement.X = -1;
+		displacement.Y = 0;
+		break;
+	case MOVING_DIRECTION_RIGHT:
+		displacement.X = 1;
+		displacement.Y = 0;
+		break;
+	case MOVING_DIRECTION_DOWN:
+		displacement.X = 0;
+		displacement.Y = 1;
+		break;
+	case MOVING_DIRECTION_UP:
+		displacement.X = 0;
+		displacement.Y = -1;
+		break;
+	default:
+		return 1;
+		break;
+	}
+
+	for(int i=0; i<3; i++){
+		mBlockPosArray[i].X += displacement.X;
+		mBlockPosArray[i].Y += displacement.Y;
+	}
+	return 0;
+}
+
+int Block::rotate(short rotatingDirection){
+	//MAPPOS newPos;
+	MAPPOS relativePos;
+
+	switch(rotatingDirection){
+	case ROTATING_DIRECTION_CLOCKWISE:
+		for(int i=1; i<3; i++){
+			relativePos.X = mBlockPosArray[i].X - mBlockPosArray[0].X;
+			relativePos.Y = mBlockPosArray[i].Y - mBlockPosArray[0].Y;
+			mBlockPosArray[i].X = mBlockPosArray[0].X + relativePos.Y * -1;
+			mBlockPosArray[i].Y = mBlockPosArray[0].Y + relativePos.X * 1;
+		}
+		break;
+	case ROTATING_DIRECTION_COUNTERCLOCK:
+		for(int i=1; i<3; i++){
+			relativePos.X = mBlockPosArray[i].X - mBlockPosArray[0].X;
+			relativePos.Y = mBlockPosArray[i].Y - mBlockPosArray[0].Y;
+			mBlockPosArray[i].X = mBlockPosArray[0].X + relativePos.Y * 1;
+			mBlockPosArray[i].Y = mBlockPosArray[0].Y + relativePos.X * -1;
+		}
+		break;
+	default:
+		return 1;
+		break;
+	}
+	return 0;
+}
+
+Block Block::getMovedBlock(short movingDirection){
+	Block movedBlock = *this;
+	movedBlock.move(movingDirection);
+	return movedBlock;
+}
+
+Block Block::getRotatedBlock(short rotatingDirection){
+	Block rotatedBlock = *this;
+	rotatedBlock.rotate(rotatingDirection);
+	return rotatedBlock;
 }

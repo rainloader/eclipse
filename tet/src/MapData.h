@@ -19,7 +19,7 @@ public:
 	~MapData();
 
 	void initialize();
-	short getMapPoint(int i, int j);
+	short getMapPoint(int X, int Y);
 protected:
 
 	/* map code

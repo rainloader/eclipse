@@ -32,6 +32,6 @@ void MapData::initialize() {
 	}
 }
 
-short MapData::getMapPoint(int i, int j){
-	return map[i][j];
+short MapData::getMapPoint(int X, int Y){
+	return map[X][Y];
 }

@@ -10,9 +10,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MOVING_DIRECTION_LEFT 1
-#define MOVING_DIRECTION_RIGHT 2
-#define MOVING_DIRECTION_DOWN 3
 
 using namespace std;
 
@@ -49,7 +46,7 @@ void IngameProcessor::generateBlock(){
 	srand(time(NULL));
 	int blockType = rand();
 	blockType = blockType % 7 + 1;
-	mBlock->setBlockType(blockType);
+	mBlock->setType(blockType);
 }
 
 void IngameProcessor::notify(int callerType) {
@@ -63,9 +60,25 @@ void IngameProcessor::notify(int callerType) {
 
 int IngameProcessor::moveBlock(short movingDirection){
 	MapData currentMap = *mPMapData;
-
-
+	Block movedBlock = mBlock->getMovedBlock(movingDirection);
+	if(blockCollisionCheck(movedBlock))
+	{
+	//	mBlock->move()
+	}
+	return 0;
 	//MapData currentMap(mPMapData);
 }
 
+
+bool IngameProcessor::blockCollisionCheck(Block block){
+	short pointValue;
+	MAPPOS blockPos;
+	for(int i=0; i<3; i++){
+		blockPos = block.getPos(i);
+		pointValue = mPMapData->getMapPoint(blockPos.X, blockPos.Y);
+		if(pointValue != 0)
+			return true;
+	}
+	return false;
+}
 

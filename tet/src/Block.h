@@ -19,10 +19,10 @@
 #define TYPE_T_BLOCK 6
 #define TYPE_Z_BLOCK 7
 
-#define ROTATING_STATUS_12 1
-#define ROTATING_STATUS_3 2
-#define ROTATING_STATUS_6 3
-#define ROTATING_STATUS_9 4
+#define MOVING_DIRECTION_LEFT 1
+#define MOVING_DIRECTION_RIGHT 2
+#define MOVING_DIRECTION_DOWN 3
+#define MOVING_DIRECTION_UP 4
 
 typedef struct _MAPPOS{
 	short X;
@@ -32,10 +32,19 @@ typedef struct _MAPPOS{
 class Block {
 public:
 	Block();
+	Block(const Block& block);
 	~Block();
-	void rotate(short rotatingDirection);
-	int setBlockType(short blockType);
-	//COORD[] getBlockPosArray();
+	int setType(short blockType);
+	short getType();
+	MAPPOS getPos(int index);
+
+	int move(short movingDirection);
+	int rotate(short rotatingDirection);
+
+	Block getMovedBlock(short movingDirection);
+	Block getRotatedBlock(short rotatingDirection);
+
+
 
 protected:
 	/* block code
@@ -48,8 +57,8 @@ protected:
 	 * 6 - T block
 	 * 7 - Z block
 	 * */
+
 	short mType;
-	short mRotatingStatus;
 	MAPPOS mBlockPosArray[4];
 };
 
