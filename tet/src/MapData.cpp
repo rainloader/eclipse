@@ -13,8 +13,8 @@ MapData::MapData() {
 }
 
 MapData::MapData(const MapData& mapData){
-	for(int i=0; i<MAP_HEIGHT; i++){
-		for(int j=0; j<MAP_WIDTH; j++){
+	for(int i=0; i<MAP_WIDTH; i++){
+		for(int j=0; j<MAP_HEIGHT; j++){
 			map[i][j] = mapData.map[i][j];
 		}
 	}
@@ -26,8 +26,8 @@ MapData::~MapData() {
 }
 
 void MapData::initialize() {
-	for(int i=0; i<MAP_HEIGHT; i++){
-		for(int j=0; j<MAP_WIDTH; j++){
+	for(int i=0; i<MAP_WIDTH; i++){
+		for(int j=0; j<MAP_HEIGHT; j++){
 			map[i][j] = 0;
 		}
 	}

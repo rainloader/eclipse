@@ -32,12 +32,13 @@ void IngameProcessor::play(){
 	mPMapData->initialize();
 	/**/mPTickCounter->setPeriod(200);//1000
 	generateBlock();
+	mPTickCounter->startThread();
 	//timer set.
 	while(1){
-		mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
+		/*mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
 		//mPInputHandler->receiveInput();
-		//start timer count.
-		mPTickCounter->startThread();
+		//start timer count.*/
+
 	}
 }
 
