@@ -25,8 +25,9 @@ PrintoutProcessor::~PrintoutProcessor() {
 void PrintoutProcessor::printPlayMap(MapData* pData){
 	//cout << "printmap" << endl;
 	for(int i=0; i<MAP_WIDTH; i++){
-		for(int j=0; j<MAP_HEIGHT; j++){
-			gotoxy(i*2, j);
+		for(int j=2; j<MAP_HEIGHT; j++){
+			//upper 2 is hidden area
+			gotoxy(i*2, j-2);
 			short mapPoint = pData->getMapPoint(i, j);
 			if(mapPoint == 0)
 				cout << "  ";

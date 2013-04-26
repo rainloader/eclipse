@@ -29,7 +29,6 @@ void TickCounter::startThread(){
 }
 
 void TickCounter::finishThread(){
-
 	CloseHandle(hThread);
 }
 

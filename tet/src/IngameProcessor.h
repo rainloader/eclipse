@@ -25,8 +25,8 @@ protected:
 	void notify(int callerType);
 
 	void generateBlock();
-	void moveBlock(int movingDirection);
-	void rotateBlock(int rotatingDirection);
+	int moveBlock(short movingDirection);
+	void rotateBlock(short rotatingDirection);
 
 
 	PrintoutProcessor* mPPrintoutProcessor;
@@ -36,9 +36,9 @@ protected:
 	MapData* mPMapData;
 	Block* mBlock;
 
-	int score;
-	int line;
-	int level;
+	int mScore;
+	int mLine;
+	int mLevel;
 
 };
 

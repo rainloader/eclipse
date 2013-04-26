@@ -8,8 +8,9 @@
 #ifndef GAMEINFO_H_
 #define GAMEINFO_H_
 
-#define MAP_HEIGHT 20
+
 #define MAP_WIDTH 10
+#define MAP_HEIGHT 22 //Hidden 2
 
 class MapData {
 public:

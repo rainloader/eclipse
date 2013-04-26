@@ -20,6 +20,9 @@ IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHan
 : mPPrintoutProcessor(pPrintoutProcessor), mPInputHandler(pInputHandler), mPMapData(pMapData) {
 	mPTickCounter = new TickCounter(this);
 	mBlock = new Block();
+	mScore = 0;
+	mLine = 0;
+	mLevel = 1;
 }
 
 IngameProcessor::~IngameProcessor() {
@@ -43,9 +46,10 @@ void IngameProcessor::play(){
 }
 
 void IngameProcessor::generateBlock(){
-//	int blockType = srand(time(NULL));
-	//blockType = blockType % 7 + 1;
-
+	srand(time(NULL));
+	int blockType = rand();
+	blockType = blockType % 7 + 1;
+	mBlock->setBlockType(blockType);
 }
 
 void IngameProcessor::notify(int callerType) {
@@ -57,8 +61,9 @@ void IngameProcessor::notify(int callerType) {
 	}
 }
 
-void IngameProcessor::moveBlock(int movingDirection){
+int IngameProcessor::moveBlock(short movingDirection){
 	MapData currentMap = *mPMapData;
+
 
 	//MapData currentMap(mPMapData);
 }
