@@ -145,7 +145,7 @@ int Block::move(short movingDirection){
 		break;
 	}
 
-	for(int i=0; i<3; i++){
+	for(int i=0; i<4; i++){
 		mBlockPosArray[i].X += displacement.X;
 		mBlockPosArray[i].Y += displacement.Y;
 	}
@@ -158,7 +158,7 @@ int Block::rotate(short rotatingDirection){
 
 	switch(rotatingDirection){
 	case ROTATING_DIRECTION_CLOCKWISE:
-		for(int i=1; i<3; i++){
+		for(int i=1; i<4; i++){
 			relativePos.X = mBlockPosArray[i].X - mBlockPosArray[0].X;
 			relativePos.Y = mBlockPosArray[i].Y - mBlockPosArray[0].Y;
 			mBlockPosArray[i].X = mBlockPosArray[0].X + relativePos.Y * -1;
@@ -166,7 +166,7 @@ int Block::rotate(short rotatingDirection){
 		}
 		break;
 	case ROTATING_DIRECTION_COUNTERCLOCK:
-		for(int i=1; i<3; i++){
+		for(int i=1; i<4; i++){
 			relativePos.X = mBlockPosArray[i].X - mBlockPosArray[0].X;
 			relativePos.Y = mBlockPosArray[i].Y - mBlockPosArray[0].Y;
 			mBlockPosArray[i].X = mBlockPosArray[0].X + relativePos.Y * 1;

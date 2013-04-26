@@ -30,7 +30,7 @@ IngameProcessor::~IngameProcessor() {
 void IngameProcessor::play(){
 	system("cls");
 	mPMapData->initialize();
-	/**/mPTickCounter->setPeriod(300);//1000
+	/**/mPTickCounter->setPeriod(200);//1000
 	generateBlock();
 	//timer set.
 	while(1){
@@ -89,7 +89,7 @@ bool IngameProcessor::checkBlockCollision(Block block){
 	MAPPOS blockPos;
 
 	/**/
-	for(int i=0; i<3; i++){
+	for(int i=0; i<4; i++){
 		blockPos = block.getPos(i);
 		/* Wall Check */
 		if(blockPos.X < 0 || blockPos.X >= MAP_WIDTH || blockPos.Y < 0 || blockPos.Y >= MAP_HEIGHT){
@@ -106,7 +106,7 @@ bool IngameProcessor::checkBlockCollision(Block block){
 
 void IngameProcessor::writeBlockToMap(){
 	MAPPOS blockPos;
-	for(int i=0; i<3; i++){
+	for(int i=0; i<4; i++){
 		blockPos = mPBlock->getPos(i);
 		mPMapData->setMapPoint(blockPos.X, blockPos.Y, mPBlock->getType());
 	}
