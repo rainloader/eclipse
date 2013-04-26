@@ -28,7 +28,7 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 	short mapPoint;
 	MAPPOS blockPosArray[4];
 
-	for(int k=0; k<3; k++){
+	for(int k=0; k<4; k++){
 		blockPosArray[k] = pBlock->getPos(k);
 	}
 

@@ -32,7 +32,8 @@ CTManager::~CTManager() {
 void CTManager::start(){
 	/* put inputha */
 	//mInputHandlerThread = (HANDLE) _beginthreadex(NULL, 0, mInputHandler.receiveInputT, NULL, 0, NULL);
-	title();
+	//title();
+	play();
 	//WaitForSingleObject(mInputHandlerThread, INFINITE);
 
 }

@@ -6,6 +6,7 @@
  */
 
 #include "MapData.h"
+#include <stdio.h>
 
 MapData::MapData() {
 	initialize();

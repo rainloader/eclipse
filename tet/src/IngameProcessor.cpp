@@ -28,7 +28,7 @@ IngameProcessor::~IngameProcessor() {
 }
 
 void IngameProcessor::play(){
-	system("cls");
+	//system("cls");
 	mPMapData->initialize();
 	/**/mPTickCounter->setPeriod(200);//1000
 	generateBlock();
@@ -64,7 +64,6 @@ void IngameProcessor::notify(int callerType) {
 }
 
 int IngameProcessor::moveBlock(short movingDirection){
-	//MapData currentMap = *mPMapData;
 	Block movedBlock = mPBlock->getMovedBlock(movingDirection);
 	if(checkBlockCollision(movedBlock))
 	{
