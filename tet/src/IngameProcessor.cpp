@@ -17,6 +17,7 @@ IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHan
 : mPPrintoutProcessor(pPrintoutProcessor), mPInputHandler(pInputHandler), mPMapData(pMapData) {
 	mPTickCounter = new TickCounter(this);
 	mPBlock = new Block();
+	isNotificationLocked = false;
 	mScore = 0;
 	mLine = 0;
 	mLevel = 1;
@@ -50,9 +51,14 @@ void IngameProcessor::generateBlock(){
 }
 
 void IngameProcessor::notify(int callerType) {
+	while(isNotificationLocked){
+		/**/cout << "Locked" << endl;
+	}
+	isNotificationLocked = true;
 	switch(callerType)
 	{
 	case NOTIFY_TICKCOUNTER :
+		{
 		int result = moveBlock(MOVING_DIRECTION_DOWN);
 		if(result != 0){
 			//set the block and generate next block;
@@ -61,7 +67,12 @@ void IngameProcessor::notify(int callerType) {
 			cout << "NEW PHASE";
 		}
 		mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
+		break;
+		}
+	default:
+		break;
 	}
+	isNotificationLocked = false;
 }
 
 int IngameProcessor::moveBlock(short movingDirection){

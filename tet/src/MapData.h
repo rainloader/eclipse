@@ -33,7 +33,7 @@ protected:
 	 * 6 - T block
 	 * 7 - Z block
 	 * */
-	short map[MAP_HEIGHT][MAP_WIDTH];
+	short map[MAP_WIDTH][MAP_HEIGHT];
 };
 
 #endif /* GAMEINFO_H_ */

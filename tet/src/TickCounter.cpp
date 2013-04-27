@@ -7,6 +7,8 @@
 
 #include "TickCounter.h"
 #include <process.h>
+#include <Windows.h>
+#pragma comment(lib, "winmm.lib")
 
 TickCounter::TickCounter(Notifiable* callee) : callee_(callee) {
 	setPeriod(1000);

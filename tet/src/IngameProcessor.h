@@ -39,6 +39,8 @@ protected:
 	MapData* mPMapData;
 	Block* mPBlock;
 
+	bool isNotificationLocked;
+
 	int mScore;
 	int mLine;
 	int mLevel;
