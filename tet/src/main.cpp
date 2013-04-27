@@ -11,8 +11,6 @@
 #include "CTManager.h"
 #include <windows.h>
 
-using namespace std;
-
 int main()
 {
 /*	AKSTestClass testClass;
