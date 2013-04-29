@@ -26,12 +26,12 @@ DWORD TickCounter::getPeriod(){
 }
 
 void TickCounter::startThread(){
-	hThread = (HANDLE) _beginthreadex(NULL, 0, runThread, (LPVOID)this, 0, NULL);
-	WaitForSingleObject(hThread, INFINITE);
+	mHThread = (HANDLE) _beginthreadex(NULL, 0, runThread, (LPVOID)this, 0, NULL);
+	WaitForSingleObject(mHThread, INFINITE);
 }
 
 void TickCounter::finishThread(){
-	CloseHandle(hThread);
+	CloseHandle(mHThread);
 }
 
 UINT WINAPI TickCounter::runThread(LPVOID p){

@@ -16,6 +16,7 @@ using namespace std;
 IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHandler* pInputHandler, MapData* pMapData)
 : mPPrintoutProcessor(pPrintoutProcessor), mPInputHandler(pInputHandler), mPMapData(pMapData) {
 	mPTickCounter = new TickCounter(this);
+	mPInputHandler = new InputHandler(this);
 	mPBlock = new Block();
 	isNotificationLocked = false;
 	mScore = 0;
@@ -29,10 +30,11 @@ IngameProcessor::~IngameProcessor() {
 }
 
 void IngameProcessor::play(){
-	//system("cls");
+	system("cls");
 	mPMapData->initialize();
 	/**/mPTickCounter->setPeriod(200);//1000
 	generateBlock();
+	mPInputHandler->startThread();
 	mPTickCounter->startThread();
 	//timer set.
 	while(1){
@@ -57,21 +59,57 @@ void IngameProcessor::notify(int callerType) {
 	isNotificationLocked = true;
 	switch(callerType)
 	{
-	case NOTIFY_TICKCOUNTER :
-		{
+	case NOTIFY_TICKCOUNTER:
+	{
 		int result = moveBlock(MOVING_DIRECTION_DOWN);
 		if(result != 0){
 			//set the block and generate next block;
 			writeBlockToMap();
 			generateBlock();
-			cout << "NEW PHASE";
 		}
-		mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
-		break;
-		}
-	default:
 		break;
 	}
+	case NOTIFY_INPUT_1P_LEFT:
+	{
+		moveBlock(MOVING_DIRECTION_LEFT);
+		break;
+	}
+	case NOTIFY_INPUT_1P_RIGHT:
+	{
+		moveBlock(MOVING_DIRECTION_RIGHT);
+		break;
+	}
+	case NOTIFY_INPUT_1P_DOWN:
+	{
+		int result = moveBlock(MOVING_DIRECTION_DOWN);
+		if(result != 0){
+			//set the block and generate next block;
+			writeBlockToMap();
+			generateBlock();
+		}
+		break;
+	}
+	case NOTIFY_INPUT_1P_DROP:
+	{
+		//TODO : drop
+		break;
+	}
+	case NOTIFY_INPUT_1P_ROTATE_CW:
+	{
+		rotateBlock(ROTATING_DIRECTION_CLOCKWISE);
+		break;
+	}
+	case NOTIFY_INPUT_1P_ROTATE_CCW:
+	{
+		rotateBlock(ROTATING_DIRECTION_COUNTERCLOCK);
+		break;
+	}
+	default:
+	{
+		break;
+	}
+	}
+	mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
 	isNotificationLocked = false;
 }
 
@@ -99,7 +137,6 @@ bool IngameProcessor::checkBlockCollision(Block block){
 	short pointValue;
 	MAPPOS blockPos;
 
-	/**/
 	for(int i=0; i<4; i++){
 		blockPos = block.getPos(i);
 		/* Wall Check */

@@ -14,7 +14,7 @@ using namespace std;
 
 
 CTManager::CTManager() {
-	mPInputHandler = new InputHandler();
+	mPInputHandler = new InputHandler(this);
 	mPPrintoutProcessor = new PrintoutProcessor();
 	mPTickCounter = new TickCounter(this);
 	mPData = new MapData();

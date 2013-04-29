@@ -22,17 +22,17 @@ public:
 	void startThread();
 	void finishThread();
 
-	static UINT WINAPI runThread(LPVOID p);
-	void run();
+
 
 protected:
-
+	static UINT WINAPI runThread(LPVOID p);
+	void run();
 	void alarm();
 	DWORD mPeriod;
 	DWORD mGameStartTime;
 	Notifiable* callee_;
 
-	HANDLE hThread;
+	HANDLE mHThread;
 };
 
 
