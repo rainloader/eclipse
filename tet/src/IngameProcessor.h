@@ -28,9 +28,12 @@ protected:
 	int moveBlock(short movingDirection);
 	int rotateBlock(short rotatingDirection);
 
+	void afterBlockDropped();
+
+	void checkLineFilled();
+	void clearLine(int lineNumber);
 	bool checkBlockCollision(Block block);
 	void writeBlockToMap();
-
 
 	PrintoutProcessor* mPPrintoutProcessor;
 	InputHandler* mPInputHandler;

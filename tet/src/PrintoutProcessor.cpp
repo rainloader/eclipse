@@ -71,6 +71,9 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 			case 7:
 				cout << "¨í";
 				break;
+			case 8:
+				cout << "¡à";
+				break;
 			default:
 				cout << "??";
 				break;

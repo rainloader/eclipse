@@ -32,7 +32,7 @@ IngameProcessor::~IngameProcessor() {
 void IngameProcessor::play(){
 	system("cls");
 	mPMapData->initialize();
-	/**/mPTickCounter->setPeriod(200);//1000
+	/**/mPTickCounter->setPeriod(1000);//1000
 	generateBlock();
 	mPInputHandler->startThread();
 	mPTickCounter->startThread();
@@ -64,8 +64,7 @@ void IngameProcessor::notify(int callerType) {
 		int result = moveBlock(MOVING_DIRECTION_DOWN);
 		if(result != 0){
 			//set the block and generate next block;
-			writeBlockToMap();
-			generateBlock();
+			afterBlockDropped();
 		}
 		break;
 	}
@@ -84,14 +83,17 @@ void IngameProcessor::notify(int callerType) {
 		int result = moveBlock(MOVING_DIRECTION_DOWN);
 		if(result != 0){
 			//set the block and generate next block;
-			writeBlockToMap();
-			generateBlock();
+			afterBlockDropped();
 		}
 		break;
 	}
 	case NOTIFY_INPUT_1P_DROP:
 	{
-		//TODO : drop
+		int result = 0;
+		while(result == 0){
+			result = moveBlock(MOVING_DIRECTION_DOWN);
+		}
+		afterBlockDropped();
 		break;
 	}
 	case NOTIFY_INPUT_1P_ROTATE_CW:
@@ -133,6 +135,45 @@ int IngameProcessor::rotateBlock(short rotatingDirection){
 	return 0;
 }
 
+void IngameProcessor::afterBlockDropped(){
+		//set the block and generate next block;
+		writeBlockToMap();
+		checkLineFilled();
+		generateBlock();
+}
+
+void IngameProcessor::checkLineFilled(){
+	bool isLineFilled;
+	for(int j=0; j<MAP_HEIGHT; j++){
+		isLineFilled = true;
+		for(int i=0; i<MAP_WIDTH; i++){
+			if(mPMapData->getMapPoint(i, j) == 0){
+				isLineFilled = false;
+				break;
+			}
+		}
+		if(isLineFilled)
+			clearLine(j);
+	}
+}
+
+void IngameProcessor::clearLine(int lineNumber){
+	/* first, clear line */
+	for(int i=0; i<MAP_WIDTH; i++){
+		mPMapData->setMapPoint(i, lineNumber, 8);
+		mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
+	}
+
+	short pointData;
+	/* second, drop upper lines */
+	for(int j=lineNumber-1; j>=0; j--){
+		for(int i=0; i<MAP_WIDTH; i++){
+			pointData = mPMapData->getMapPoint(i, j);
+			mPMapData->setMapPoint(i, j+1, pointData);
+		}
+	}
+}
+
 bool IngameProcessor::checkBlockCollision(Block block){
 	short pointValue;
 	MAPPOS blockPos;
@@ -159,4 +200,3 @@ void IngameProcessor::writeBlockToMap(){
 		mPMapData->setMapPoint(blockPos.X, blockPos.Y, mPBlock->getType());
 	}
 }
-

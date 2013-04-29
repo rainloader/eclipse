@@ -32,6 +32,7 @@ protected:
 	 * 5 - S block
 	 * 6 - T block
 	 * 7 - Z block
+	 * 8 - clearLine effect
 	 * */
 	short map[MAP_WIDTH][MAP_HEIGHT];
 };

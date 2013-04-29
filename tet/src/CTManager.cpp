@@ -75,7 +75,6 @@ void CTManager::notify(int callerType){
 	}
 }
 
-
 void CTManager::moveBlock(int movingDirection){
 
 }
