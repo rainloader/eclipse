@@ -42,6 +42,7 @@ protected:
 
 	MapData* mPMapData;
 	Block* mPBlock;
+	Block* mPNextBlock;
 
 	bool isNotificationLocked;
 	bool isGameOvered;

@@ -24,7 +24,6 @@ PrintoutProcessor::~PrintoutProcessor() {
 
 void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 	//cout << "printmap" << endl;
-	std::string input;
 	short mapPoint;
 	MAPPOS blockPosArray[4];
 
@@ -73,6 +72,59 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 				break;
 			case 8:
 				cout << "¡à";
+				break;
+			default:
+				cout << "??";
+				break;
+			}
+		}
+	}
+}
+
+void PrintoutProcessor::printNextBlock(Block* pNextBlock){
+	MAPPOS blockPosArray[4];
+
+	for(int k=0; k<4; k++){
+		blockPosArray[k] = pNextBlock->getPos(k);
+		blockPosArray[k].X -= 3;
+	}
+
+	for(int i=0; i<4; i++){
+		for(int j=0; j<2; j++){
+			gotoxy(i*2 + M_UI_NEXT_BLOCK.X, j +  M_UI_NEXT_BLOCK.Y);
+			short mapPoint = 0;
+			for(int k=0; k<4; k++){
+				if(blockPosArray[k].X == i && blockPosArray[k].Y == j)
+				{
+					mapPoint = pNextBlock->getType();
+					break;
+				}
+			}
+
+			switch(mapPoint){
+			case 0:
+				cout << "  ";
+				break;
+			case 1:
+				cout << "¡á";
+				break;
+			case 2:
+				cout << "¨è";
+				break;
+			case 3:
+				cout << "¨é";
+				break;
+			case 4:
+				cout << "¨ê";
+				break;
+			case 5:
+				cout << "¨ë";
+				break;
+			case 6:
+				cout << "¨ì";
+				break;
+			case 7:
+				cout << "¨í";
 				break;
 			default:
 				cout << "??";

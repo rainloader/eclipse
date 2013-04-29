@@ -18,6 +18,7 @@ IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHan
 	mPTickCounter = new TickCounter(this);
 	mPInputHandler = new InputHandler(this);
 	mPBlock = new Block();
+	mPNextBlock = new Block();
 	isNotificationLocked = false;
 	isGameOvered = false;
 	mScore = 0;
@@ -29,6 +30,7 @@ IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHan
 IngameProcessor::~IngameProcessor() {
 	delete mPTickCounter;
 	delete mPBlock;
+	delete mPNextBlock;
 }
 
 void IngameProcessor::play(){
@@ -37,9 +39,11 @@ void IngameProcessor::play(){
 	/**/mPTickCounter->setPeriod(1000);//1000
 	isNotificationLocked = false;
 	isGameOvered = false;
-	generateBlock();
 	mPInputHandler->startThread();
 	mPTickCounter->startThread();
+	generateBlock();
+	mPPrintoutProcessor->printNextBlock(mPNextBlock);
+	generateBlock();
 
 	//timer set.
 	while(1){
@@ -56,9 +60,10 @@ void IngameProcessor::play(){
 }
 
 void IngameProcessor::generateBlock(){
-	int blockType = rand();
-	blockType = blockType % 7 + 1;
-	mPBlock->init(blockType);
+	mPBlock->init(mPNextBlock->getType());
+	int nextBlockType = rand();
+	nextBlockType = nextBlockType % 7 + 1;
+	mPNextBlock->init(nextBlockType);
 }
 
 void IngameProcessor::notify(int callerType) {
@@ -153,6 +158,7 @@ void IngameProcessor::afterBlockDropped(){
 		if(checkGameOver()){
 			isGameOvered = true;
 		}
+		mPPrintoutProcessor->printNextBlock(mPNextBlock);
 }
 
 bool IngameProcessor::checkGameOver(){

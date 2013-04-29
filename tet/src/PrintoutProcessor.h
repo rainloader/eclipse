@@ -17,13 +17,15 @@ public:
 	PrintoutProcessor();
 	~PrintoutProcessor();
 	void printPlayMap(MapData* pData, Block* pBlock);
+	void printNextBlock(Block* pNextBlock);
 	void clearConsole();
 protected:
 	void gotoxy(int x, int y);
 
 private:
 	/* play ui */
-	static COORD M_UI_PLAY_MAP;
+	const COORD M_UI_PLAY_MAP = {3,3};
+	const COORD M_UI_NEXT_BLOCK = {25,3};
 	//const char M_UI_PLAY_MAP_HEIGHT = 5;
 
 
