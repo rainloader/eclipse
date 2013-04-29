@@ -27,7 +27,7 @@ DWORD TickCounter::getPeriod(){
 
 void TickCounter::startThread(){
 	mHThread = (HANDLE) _beginthreadex(NULL, 0, runThread, (LPVOID)this, 0, NULL);
-	WaitForSingleObject(mHThread, INFINITE);
+	//WaitForSingleObject(mHThread, INFINITE);
 }
 
 void TickCounter::finishThread(){

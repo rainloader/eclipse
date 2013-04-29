@@ -18,7 +18,6 @@ MapData::MapData(const MapData& mapData){
 			map[i][j] = mapData.map[i][j];
 		}
 	}
-
 }
 
 MapData::~MapData() {

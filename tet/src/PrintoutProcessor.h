@@ -17,6 +17,7 @@ public:
 	PrintoutProcessor();
 	~PrintoutProcessor();
 	void printPlayMap(MapData* pData, Block* pBlock);
+	void clearConsole();
 protected:
 	void gotoxy(int x, int y);
 

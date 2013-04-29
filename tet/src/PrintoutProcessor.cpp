@@ -82,6 +82,11 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 	}
 }
 
+void PrintoutProcessor::clearConsole(){
+	gotoxy(0, 0);
+	system("cls");
+}
+
 void PrintoutProcessor::gotoxy(int x, int y)
 {
     COORD coord;

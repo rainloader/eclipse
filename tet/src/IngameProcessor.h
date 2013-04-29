@@ -30,6 +30,7 @@ protected:
 
 	void afterBlockDropped();
 
+	bool checkGameOver();
 	void checkLineFilled();
 	void clearLine(int lineNumber);
 	bool checkBlockCollision(Block block);
@@ -43,6 +44,7 @@ protected:
 	Block* mPBlock;
 
 	bool isNotificationLocked;
+	bool isGameOvered;
 
 	int mScore;
 	int mLine;

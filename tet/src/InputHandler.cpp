@@ -35,6 +35,10 @@ void InputHandler::startThread() {
 	mHThread = (HANDLE) _beginthreadex(NULL, 0, runThread, (LPVOID)this, 0, NULL);
 }
 
+void InputHandler::finishThread() {
+	CloseHandle(mHThread);
+}
+
 UINT WINAPI InputHandler::receiveInputT(LPVOID p){
 	int keyState = 0;
 

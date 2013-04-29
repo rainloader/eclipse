@@ -19,6 +19,7 @@ IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHan
 	mPInputHandler = new InputHandler(this);
 	mPBlock = new Block();
 	isNotificationLocked = false;
+	isGameOvered = false;
 	mScore = 0;
 	mLine = 0;
 	mLevel = 1;
@@ -34,16 +35,24 @@ void IngameProcessor::play(){
 	system("cls");
 	mPMapData->initialize();
 	/**/mPTickCounter->setPeriod(1000);//1000
+	isNotificationLocked = false;
+	isGameOvered = false;
 	generateBlock();
 	mPInputHandler->startThread();
 	mPTickCounter->startThread();
+
 	//timer set.
 	while(1){
 		/*mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
 		//mPInputHandler->receiveInput();
 		//start timer count.*/
-
+		if(isGameOvered)
+			break;
 	}
+	mPInputHandler->finishThread();
+	mPTickCounter->finishThread();
+	//mPPrintoutProcessor->clearConsole();
+	cout << "Game Over";
 }
 
 void IngameProcessor::generateBlock(){
@@ -54,7 +63,8 @@ void IngameProcessor::generateBlock(){
 
 void IngameProcessor::notify(int callerType) {
 	while(isNotificationLocked){
-		//wait until lock disabled
+		if(isGameOvered)
+			return;
 	}
 	isNotificationLocked = true;
 	switch(callerType)
@@ -140,6 +150,15 @@ void IngameProcessor::afterBlockDropped(){
 		writeBlockToMap();
 		checkLineFilled();
 		generateBlock();
+		if(checkGameOver()){
+			isGameOvered = true;
+		}
+}
+
+bool IngameProcessor::checkGameOver(){
+	if(checkBlockCollision(*mPBlock))
+		return true;
+	return false;
 }
 
 void IngameProcessor::checkLineFilled(){
