@@ -22,6 +22,7 @@ IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHan
 	mScore = 0;
 	mLine = 0;
 	mLevel = 1;
+	srand(time(NULL));
 }
 
 IngameProcessor::~IngameProcessor() {
@@ -46,7 +47,6 @@ void IngameProcessor::play(){
 }
 
 void IngameProcessor::generateBlock(){
-	srand(time(NULL));
 	int blockType = rand();
 	blockType = blockType % 7 + 1;
 	mPBlock->init(blockType);
