@@ -22,6 +22,19 @@ PrintoutProcessor::~PrintoutProcessor() {
 	// TODO Auto-generated destructor stub
 }
 
+void PrintoutProcessor::printPlayUI(){
+	/* print play map ui */
+	for(int i=0; i<MAP_WIDTH+2; i++){
+		for(int j=0; j<MAP_HEIGHT; j++){
+			gotoxy(i*2 + M_UI_PLAY_MAP.X, j + M_UI_PLAY_MAP.Y);
+			cout << "||";
+		}
+	}
+
+	/* print next block ui */
+	//for(int i=0; i<MAP_WIDTH)
+}
+
 void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 	//cout << "printmap" << endl;
 	short mapPoint;
@@ -34,7 +47,7 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 	for(int i=0; i<MAP_WIDTH; i++){
 		for(int j=2; j<MAP_HEIGHT; j++){
 			//upper 2 is hidden area
-			gotoxy(i*2, j);
+			gotoxy(i*2 + M_UI_PLAY_MAP.X + 2, j + M_UI_PLAY_MAP.Y - 1);
 
 			mapPoint = pData->getMapPoint(i, j);
 			for(int k=0; k<4; k++){

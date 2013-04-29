@@ -34,7 +34,8 @@ IngameProcessor::~IngameProcessor() {
 }
 
 void IngameProcessor::play(){
-	system("cls");
+	mPPrintoutProcessor->printPlayUI();
+
 	mPMapData->initialize();
 	/**/mPTickCounter->setPeriod(1000);//1000
 	isNotificationLocked = false;
@@ -42,8 +43,9 @@ void IngameProcessor::play(){
 	mPInputHandler->startThread();
 	mPTickCounter->startThread();
 	generateBlock();
-	mPPrintoutProcessor->printNextBlock(mPNextBlock);
 	generateBlock();
+	mPPrintoutProcessor->printNextBlock(mPNextBlock);
+	mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
 
 	//timer set.
 	while(1){
