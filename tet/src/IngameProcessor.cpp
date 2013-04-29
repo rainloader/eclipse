@@ -54,7 +54,7 @@ void IngameProcessor::generateBlock(){
 
 void IngameProcessor::notify(int callerType) {
 	while(isNotificationLocked){
-		/**/cout << "Locked" << endl;
+		//wait until lock disabled
 	}
 	isNotificationLocked = true;
 	switch(callerType)
