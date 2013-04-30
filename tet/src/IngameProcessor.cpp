@@ -37,7 +37,7 @@ void IngameProcessor::play(){
 	mPPrintoutProcessor->printPlayUI();
 
 	mPMapData->initialize();
-	/**/mPTickCounter->setPeriod(1000);//1000
+	mPTickCounter->setPeriod(1000);
 	isNotificationLocked = false;
 	isGameOvered = false;
 	mPInputHandler->startThread();
@@ -155,7 +155,10 @@ int IngameProcessor::rotateBlock(short rotatingDirection){
 void IngameProcessor::afterBlockDropped(){
 		//set the block and generate next block;
 		writeBlockToMap();
-		checkLineFilled();
+		int clearedLine = checkLineFilled();
+		/* Calculate score */
+		calculateScoreAndLevel(clearedLine);
+
 		generateBlock();
 		if(checkGameOver()){
 			isGameOvered = true;
@@ -169,7 +172,35 @@ bool IngameProcessor::checkGameOver(){
 	return false;
 }
 
-void IngameProcessor::checkLineFilled(){
+void IngameProcessor::calculateScoreAndLevel(int clearedLine){
+	/* cascade line */
+	mLine += clearedLine;
+
+	/* calculate score */
+	int increasingScore = 0;
+	switch(clearedLine){
+	case 1:
+		increasingScore = 100;
+		break;
+	case 2:
+		increasingScore = 300;
+		break;
+	case 3:
+		increasingScore = 500;
+		break;
+	case 4:
+		increasingScore = 800;
+		break;
+	default:
+		break;
+	}
+	increasingScore *= mLevel;	/* adjust level */
+
+	/* adjust level by line */
+}
+
+int IngameProcessor::checkLineFilled(){
+	int clearedLine = 0;
 	bool isLineFilled;
 	for(int j=0; j<MAP_HEIGHT; j++){
 		isLineFilled = true;
@@ -180,8 +211,9 @@ void IngameProcessor::checkLineFilled(){
 			}
 		}
 		if(isLineFilled)
-			clearLine(j);
+			clearLine(j), clearedLine++;
 	}
+	return clearedLine;
 }
 
 void IngameProcessor::clearLine(int lineNumber){

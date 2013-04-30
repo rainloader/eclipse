@@ -31,7 +31,8 @@ protected:
 	void afterBlockDropped();
 
 	bool checkGameOver();
-	void checkLineFilled();
+	void calculateScoreAndLevel(int clearedLine);
+	int checkLineFilled();
 	void clearLine(int lineNumber);
 	bool checkBlockCollision(Block block);
 	void writeBlockToMap();
