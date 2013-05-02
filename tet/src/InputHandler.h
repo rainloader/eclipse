@@ -18,6 +18,7 @@ public:
 
 	void startThread();
 	void finishThread();
+	void switchCallee(Notifiable* callee_);
 
 	static UINT WINAPI receiveInputT(LPVOID p);
 	char receiveInput();
@@ -30,7 +31,7 @@ protected:
 	char receiveInputThread(LPVOID p);
 	char keyStat;
 
-	Notifiable* callee_;
+	Notifiable* mCallee_;
 	HANDLE mHThread;
 };
 

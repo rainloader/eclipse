@@ -16,17 +16,21 @@ class PrintoutProcessor {
 public:
 	PrintoutProcessor();
 	~PrintoutProcessor();
+	void printTitle();
+	void printMenu();
 	void printPlayUI();
 	void printPlayMap(MapData* pData, Block* pBlock);
 	void printNextBlock(Block* pNextBlock);
+	void printPlayData(int score, int line, int level);
 	void clearConsole();
 protected:
 	void gotoxy(int x, int y);
 
 private:
 	/* play ui */
-	const COORD M_UI_PLAY_MAP = {2,1};
-	const COORD M_UI_NEXT_BLOCK = {30,3};
+	COORD M_UI_PLAY_MAP;
+	COORD M_UI_NEXT_BLOCK;
+	COORD M_UI_PLAY_DATA;
 	//const char M_UI_PLAY_MAP_HEIGHT = 5;
 
 

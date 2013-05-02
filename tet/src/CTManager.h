@@ -15,6 +15,8 @@
 #include "TickCounter.h"
 #include "Notifiable.h"
 
+enum State{s_title, s_menu, s_play, s_end};
+
 class CTManager : protected Notifiable {
 public:
 	CTManager();
@@ -23,26 +25,19 @@ public:
 	void start();
 	void end();
 protected:
-	void closeThread();
+	void runState();
 	void title();
 	void menu();
 	void play();
 
 	void notify(int callerType);
 
-	void drawMap();
-
-	void moveBlock(int movingDirection);
-	void rotateBlock(int rotatingDirection);
-
 	PrintoutProcessor* mPPrintoutProcessor;
 	InputHandler* mPInputHandler;
-
 	IngameProcessor* mPIngameProcessor;
-
 	TickCounter* mPTickCounter;
-	//HANDLE mInputHandlerThread;
 	MapData* mPData;
+	State mRunningState;
 private:
 };
 

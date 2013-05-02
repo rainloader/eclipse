@@ -17,7 +17,7 @@
 
 class IngameProcessor : protected Notifiable {
 public:
-	IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHandler* pInputHandler, MapData* pData);
+	IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHandler* pInputHandler);
 	~IngameProcessor();
 	void play();
 

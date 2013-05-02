@@ -10,7 +10,7 @@
 #include <iostream>
 #include <conio.h>
 /**/#include <stdio.h>
-#pragma comment(lib, "winmm.lib")
+//#pragma comment(lib, "winmm.lib")
 
 using namespace std;
 
@@ -22,7 +22,7 @@ using namespace std;
 #define KEY_1P_ROTATE_CCW	79	//end key
 
 
-InputHandler::InputHandler(Notifiable* callee) : callee_(callee) {
+InputHandler::InputHandler(Notifiable* callee) : mCallee_(callee) {
 	mHThread = 0;
 	keyStat = 0;
 }
@@ -37,6 +37,10 @@ void InputHandler::startThread() {
 
 void InputHandler::finishThread() {
 	CloseHandle(mHThread);
+}
+
+void InputHandler::switchCallee(Notifiable* callee_){
+	mCallee_ = callee_;
 }
 
 UINT WINAPI InputHandler::receiveInputT(LPVOID p){
@@ -151,7 +155,7 @@ void InputHandler::run(){
 }
 
 void InputHandler::passInput(int callerInputType){
-	callee_->notify(callerInputType);
+	mCallee_->notify(callerInputType);
 }
 
 

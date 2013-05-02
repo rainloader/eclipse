@@ -6,24 +6,20 @@
  */
 
 #include "CTManager.h"
-#include <iostream>
 #include <process.h>
 #include <windows.h>
-
-using namespace std;
 
 
 CTManager::CTManager() {
 	mPInputHandler = new InputHandler(this);
 	mPPrintoutProcessor = new PrintoutProcessor();
 	mPTickCounter = new TickCounter(this);
-	mPData = new MapData();
-	mPIngameProcessor = new IngameProcessor(mPPrintoutProcessor, mPInputHandler, mPData);
+	mPIngameProcessor = new IngameProcessor(mPPrintoutProcessor, mPInputHandler);
+	mRunningState = s_title;
 }
 
 CTManager::~CTManager() {
 	delete mPIngameProcessor;
-	delete mPData;
 	delete mPTickCounter;
 	delete mPInputHandler;
 	delete mPPrintoutProcessor;
@@ -31,66 +27,53 @@ CTManager::~CTManager() {
 
 void CTManager::start(){
 	/* put inputha */
-	//mInputHandlerThread = (HANDLE) _beginthreadex(NULL, 0, mInputHandler.receiveInputT, NULL, 0, NULL);
 	//title();
-	play();
-	//WaitForSingleObject(mInputHandlerThread, INFINITE);
+	runState();
+}
 
+void CTManager::runState(){
+	while(mRunningState != s_end){
+		switch (mRunningState){
+			case s_title:
+				title();
+				break;
+			case s_menu:
+				menu();
+				break;
+			case s_play:
+				play();
+				break;
+			default:
+				break;
+		}
+	}
 }
 
 void CTManager::title(){
-	cout << "TITLE" << endl;
-	cout << "Press Any Key" << endl;
+	mPPrintoutProcessor->clearConsole();
+	mPPrintoutProcessor->printTitle();
 	while(1){
 		if(mPInputHandler->receiveInput() != 0)
 		{
-			menu();
+			mRunningState = s_menu;
 			break;
 		}
 	}
-	end();
 }
 
 void CTManager::menu(){
-	system("cls");
-	cout << "MENU" << endl;
+	mPPrintoutProcessor->clearConsole();
+	mPPrintoutProcessor->printMenu();
 	char ch = mPInputHandler->receiveInput();
-	cout << ch << endl;
-	play();
+	mRunningState = s_play;
 }
 
 void CTManager::play(){
+	mPPrintoutProcessor->clearConsole();
 	mPIngameProcessor->play();
+	mRunningState = s_end;
 }
 
 void CTManager::notify(int callerType){
-	if(callerType == NOTIFY_TICKCOUNTER){
-		//down block
 
-		//if(space below) -> down
-
-		//else(no space) -> next block
-
-		/**/cout << "!!";
-	}
-}
-
-void CTManager::moveBlock(int movingDirection){
-
-}
-
-void CTManager::rotateBlock(int rotatingDirection){
-
-}
-
-void CTManager::end(){
-	closeThread();
-}
-
-void CTManager::drawMap(){
-
-}
-
-void CTManager::closeThread(){
-	//CloseHandle(mInputHandlerThread);
 }

@@ -13,10 +13,11 @@
 
 using namespace std;
 
-IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHandler* pInputHandler, MapData* pMapData)
-: mPPrintoutProcessor(pPrintoutProcessor), mPInputHandler(pInputHandler), mPMapData(pMapData) {
+IngameProcessor::IngameProcessor(PrintoutProcessor* pPrintoutProcessor, InputHandler* pInputHandler)
+: mPPrintoutProcessor(pPrintoutProcessor), mPInputHandler(pInputHandler) {
+	mPInputHandler->switchCallee(this);
 	mPTickCounter = new TickCounter(this);
-	mPInputHandler = new InputHandler(this);
+	mPMapData = new MapData();
 	mPBlock = new Block();
 	mPNextBlock = new Block();
 	isNotificationLocked = false;
@@ -31,6 +32,7 @@ IngameProcessor::~IngameProcessor() {
 	delete mPTickCounter;
 	delete mPBlock;
 	delete mPNextBlock;
+	delete mPMapData;
 }
 
 void IngameProcessor::play(){
@@ -46,6 +48,7 @@ void IngameProcessor::play(){
 	generateBlock();
 	mPPrintoutProcessor->printNextBlock(mPNextBlock);
 	mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
+	mPPrintoutProcessor->printPlayData(mScore, mLine, mLevel);
 
 	//timer set.
 	while(1){
@@ -129,6 +132,8 @@ void IngameProcessor::notify(int callerType) {
 	}
 	}
 	mPPrintoutProcessor->printPlayMap(mPMapData, mPBlock);
+	mPPrintoutProcessor->printPlayData(mScore, mLine, mLevel);
+
 	isNotificationLocked = false;
 }
 
@@ -194,9 +199,18 @@ void IngameProcessor::calculateScoreAndLevel(int clearedLine){
 	default:
 		break;
 	}
-	increasingScore *= mLevel;	/* adjust level */
+	increasingScore *= mLevel;	/* adjust score by level */
+	mScore += increasingScore;
 
 	/* adjust level by line */
+	mLevel = mLine/10 + 1;
+
+	/* adjust speed by level */
+	int period = 1000;
+	for(int i=0; i<mLevel-1; i++){
+		period *= 0.9;
+	}
+	mPTickCounter->setPeriod(period);
 }
 
 int IngameProcessor::checkLineFilled(){
