@@ -15,11 +15,27 @@ using namespace std;
 
 PrintoutProcessor::PrintoutProcessor() {
 	// TODO Auto-generated constructor stub
-	//M_UI_PLAY_MAP = {5, 5};
+	M_UI_PLAY_MAP.X = 2;
+	M_UI_PLAY_MAP.Y = 1;
+
+	M_UI_NEXT_BLOCK.X = 30;
+	M_UI_NEXT_BLOCK.Y = 3;
+
+	M_UI_PLAY_DATA.X = 30;
+	M_UI_PLAY_DATA.Y = 15;
 }
 
 PrintoutProcessor::~PrintoutProcessor() {
 	// TODO Auto-generated destructor stub
+}
+
+void PrintoutProcessor::printTitle(){
+	cout << "TITLE" << endl;
+	cout << "Press Any Key" << endl;
+}
+
+void PrintoutProcessor::printMenu(){
+	cout << "MENU" << endl;
 }
 
 void PrintoutProcessor::printPlayUI(){
@@ -145,6 +161,15 @@ void PrintoutProcessor::printNextBlock(Block* pNextBlock){
 			}
 		}
 	}
+}
+
+void PrintoutProcessor::printPlayData(int score, int line, int level){
+	gotoxy(M_UI_PLAY_DATA.X+4, M_UI_PLAY_DATA.Y+2);
+	cout << score;
+	gotoxy(M_UI_PLAY_DATA.X+4, M_UI_PLAY_DATA.Y+4);
+	cout << line;
+	gotoxy(M_UI_PLAY_DATA.X+4, M_UI_PLAY_DATA.Y+6);
+	cout << level;
 }
 
 void PrintoutProcessor::clearConsole(){
