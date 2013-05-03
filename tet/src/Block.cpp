@@ -99,11 +99,11 @@ int Block::init(short blockType){
 		mBlockPosArray[0].X = 4;
 		mBlockPosArray[0].Y = 1;
 		mBlockPosArray[1].X = 3;
-		mBlockPosArray[1].Y = 1;
+		mBlockPosArray[1].Y = 0;
 		mBlockPosArray[2].X = 4;
 		mBlockPosArray[2].Y = 0;
 		mBlockPosArray[3].X = 5;
-		mBlockPosArray[3].Y = 0;
+		mBlockPosArray[3].Y = 1;
 		break;
 		/* if there`s invalid block type, return error state */
 	default:

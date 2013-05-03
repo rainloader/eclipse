@@ -25,7 +25,8 @@ public:
 	void clearConsole();
 protected:
 	void gotoxy(int x, int y);
-
+	void setColor(int color, int bgcolor);
+	int _drgb ( bool d, bool r, bool g, bool b);
 private:
 	/* play ui */
 	COORD M_UI_PLAY_MAP;
@@ -37,3 +38,4 @@ private:
 };
 
 #endif /* PRINTOUTPROCESSOR_H_ */
+

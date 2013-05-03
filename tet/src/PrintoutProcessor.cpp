@@ -79,28 +79,36 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 				cout << "  ";
 				break;
 			case 1:
+				setColor(0b1011, 0);//cyan
 				cout << "¡á";
 				break;
 			case 2:
-				cout << "¨è";
+				setColor(0b1001, 0);//blue
+				cout << "¡á";
 				break;
 			case 3:
-				cout << "¨é";
+				setColor(0b1111, 0);//orange->white
+				cout << "¡á";
 				break;
 			case 4:
-				cout << "¨ê";
+				setColor(0b1110, 0);//yellow
+				cout << "¡á";
 				break;
 			case 5:
-				cout << "¨ë";
+				setColor(0b1010, 0);//green
+				cout << "¡á";
 				break;
 			case 6:
-				cout << "¨ì";
+				setColor(0b1101, 0);//purple
+				cout << "¡á";
 				break;
 			case 7:
-				cout << "¨í";
+				setColor(0b1100, 0);//red
+				cout << "¡á";
 				break;
 			case 8:
-				cout << "¡à";
+				setColor(0x111, 0);
+				cout << "¢Ý";
 				break;
 			default:
 				cout << "??";
@@ -108,6 +116,7 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 			}
 		}
 	}
+	setColor(0b0111, 0);
 }
 
 void PrintoutProcessor::printNextBlock(Block* pNextBlock){
@@ -135,25 +144,32 @@ void PrintoutProcessor::printNextBlock(Block* pNextBlock){
 				cout << "  ";
 				break;
 			case 1:
+				setColor(0b1011, 0);//cyan
 				cout << "¡á";
 				break;
 			case 2:
-				cout << "¨è";
+				setColor(0b1001, 0);//blue
+				cout << "¡á";
 				break;
 			case 3:
-				cout << "¨é";
+				setColor(0b1111, 0);//orange->white
+				cout << "¡á";
 				break;
 			case 4:
-				cout << "¨ê";
+				setColor(0b1110, 0);//yellow
+				cout << "¡á";
 				break;
 			case 5:
-				cout << "¨ë";
+				setColor(0b1010, 0);//green
+				cout << "¡á";
 				break;
 			case 6:
-				cout << "¨ì";
+				setColor(0b1101, 0);//purple
+				cout << "¡á";
 				break;
 			case 7:
-				cout << "¨í";
+				setColor(0b1100, 0);//red
+				cout << "¡á";
 				break;
 			default:
 				cout << "??";
@@ -161,9 +177,11 @@ void PrintoutProcessor::printNextBlock(Block* pNextBlock){
 			}
 		}
 	}
+	setColor(0b0111, 0);
 }
 
 void PrintoutProcessor::printPlayData(int score, int line, int level){
+	setColor(0b0111, 0);
 	gotoxy(M_UI_PLAY_DATA.X+4, M_UI_PLAY_DATA.Y+2);
 	cout << score;
 	gotoxy(M_UI_PLAY_DATA.X+4, M_UI_PLAY_DATA.Y+4);
@@ -173,6 +191,7 @@ void PrintoutProcessor::printPlayData(int score, int line, int level){
 }
 
 void PrintoutProcessor::clearConsole(){
+	setColor(0b0111, 0);
 	gotoxy(0, 0);
 	system("cls");
 }
@@ -184,3 +203,23 @@ void PrintoutProcessor::gotoxy(int x, int y)
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
+
+void PrintoutProcessor::setColor(int color, int bgcolor)
+
+{
+
+    color &= 0xf;
+
+    bgcolor &= 0xf;
+
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (bgcolor << 4) | color);
+
+}
+
+inline int PrintoutProcessor::_drgb ( bool d, bool r, bool g, bool b)
+ {
+     return (d << 3) + (r << 2) + (g << 1) + (b << 0);
+ }
+
+
+

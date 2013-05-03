@@ -35,7 +35,7 @@ void CTManager::runState(){
 	while(mRunningState != s_end){
 		switch (mRunningState){
 			case s_title:
-				title();
+				play();//title();
 				break;
 			case s_menu:
 				menu();
