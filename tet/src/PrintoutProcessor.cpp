@@ -107,7 +107,7 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 				cout << "бс";
 				break;
 			case 8:
-				setColor(0x111, 0);
+				setColor(0b0111, 0);
 				cout << "в▌";
 				break;
 			default:

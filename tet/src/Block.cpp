@@ -28,6 +28,17 @@ Block::~Block() {
 int Block::init(short blockType){
 	/*set block type*/
 	switch(blockType){
+	case 0:
+		mType = 0;
+		mBlockPosArray[0].X = 0;
+		mBlockPosArray[0].Y = 0;
+		mBlockPosArray[1].X = 0;
+		mBlockPosArray[1].Y = 0;
+		mBlockPosArray[2].X = 0;
+		mBlockPosArray[2].Y = 0;
+		mBlockPosArray[3].X = 0;
+		mBlockPosArray[3].Y = 0;
+		break;
 	case TYPE_I_BLOCK:
 		mType = TYPE_I_BLOCK;
 		mBlockPosArray[0].X = 4;

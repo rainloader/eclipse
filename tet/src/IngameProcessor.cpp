@@ -272,4 +272,5 @@ void IngameProcessor::writeBlockToMap(){
 		blockPos = mPBlock->getPos(i);
 		mPMapData->setMapPoint(blockPos.X, blockPos.Y, mPBlock->getType());
 	}
+	mPBlock->init(0);
 }
