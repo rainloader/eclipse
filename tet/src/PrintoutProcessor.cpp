@@ -87,7 +87,7 @@ void PrintoutProcessor::printPlayMap(MapData* pData, Block* pBlock){
 				cout << "бс";
 				break;
 			case 3:
-				setColor(0b1111, 0);//orange->white
+				setColor(0b0110, 0);//orange->white
 				cout << "бс";
 				break;
 			case 4:
@@ -152,7 +152,7 @@ void PrintoutProcessor::printNextBlock(Block* pNextBlock){
 				cout << "бс";
 				break;
 			case 3:
-				setColor(0b1111, 0);//orange->white
+				setColor(0b0110, 0);//orange->white
 				cout << "бс";
 				break;
 			case 4:
