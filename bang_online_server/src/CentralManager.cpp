@@ -9,7 +9,8 @@
 
 CentralManager::CentralManager()
 : mpNetworkConnectManager (new NetworkConnectManager()),
-  mpUIController(new UIController()){
+  mpUIController(new UIController()),
+  mServerState(INIT) {
 
 }
 
@@ -18,3 +19,14 @@ CentralManager::~CentralManager() {
 	delete mpUIController;
 }
 
+void CentralManager::process() {
+	while(!SHUTDOWN){
+		switch(mServerState){
+		case INIT:
+
+			break;
+		default:
+			break;
+		}
+	}
+}

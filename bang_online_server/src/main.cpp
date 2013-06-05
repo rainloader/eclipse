@@ -10,8 +10,9 @@
 #include "CentralManager.h"
 
 int main(){
-	CentralManager cm();
+	CentralManager cm = CentralManager();
 
+	cm.process();
 
 	printf("HELL O\n");
 	return 0;

@@ -11,15 +11,24 @@
 #include "ui/UIController.h"
 #include "network/NetworkConnectManager.h"
 
+enum SERVER_STATE{
+	INIT,
+	RUN,
+	STOP,
+	SHUTDOWN
+};
+
 class CentralManager {
 public:
 	CentralManager();
 	~CentralManager();
 
+	void process();
+
 private:
 	NetworkConnectManager* mpNetworkConnectManager;
 	UIController* mpUIController;
-
+	SERVER_STATE mServerState;
 };
 
 #endif /* CENTRALMANAGER_H_ */
